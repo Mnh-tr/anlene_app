@@ -14,10 +14,18 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Button from "../components/Button";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
+import { StackParamList } from "../navigation/types";
 const { width, height } = Dimensions.get("window");
 
+// Định nghĩa kiểu dữ liệu cho navigation
+type HomeScreenNavigationProp = StackNavigationProp<StackParamList, "HomeScreen">;
+
 const HomeScreen = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
+
   const dispatch: AppDispatch = useDispatch();
   const { images, loading, error } = useSelector(
     (state: RootState) => state.images
@@ -49,6 +57,7 @@ const HomeScreen = () => {
     (image) => image.name === "Frame229.png"
   )?.url;
   const imgVoucher = images.find((image) => image.name === "Frame230.png")?.url;
+  const imgTitleApp = images.find((image) => image.name === "tittleApp.png")?.url;
 
   return (
     <LinearGradient
@@ -78,8 +87,13 @@ const HomeScreen = () => {
         </Text>
       </View> */}
       <View style={styles.header}>
-        <Text style={styles.headerText}>Trang 1/6</Text>
-        <Text style={styles.headerTitle}>Anlene</Text>
+        <Text style={styles.headerText}>&lt; Trang 1/6 &gt;</Text>
+        {/* <Text style={styles.headerTitle}>Anlene</Text> */}
+        <Image
+          style={{ width: 60, height: 16, resizeMode: "contain",position: "absolute",
+            right: 16, }}
+          source={{ uri: imgTitleApp }}
+        ></Image>
       </View>
 
       <View style={{ marginTop: 10, paddingHorizontal: 18 }}>
@@ -128,6 +142,7 @@ const HomeScreen = () => {
             fontFamily: "SVN-Gotham",
             marginTop: 10,
             color: "white",
+            zIndex: 1
           }}
         >
           Ngay lúc này, hãy{" "}
@@ -143,7 +158,8 @@ const HomeScreen = () => {
           width: "100%",
           height: 400,
           overflow: "hidden",
-          marginTop: 10,
+          marginTop: -14,
+          zIndex: 0,
         }}
       >
         <Image
@@ -171,7 +187,7 @@ const HomeScreen = () => {
           }}
         />
         <View style={styles.buttonWrapper}>
-          <Button title="KIỂM TRA NGAY" onPress={() => {}} />
+          <Button title="KIỂM TRA NGAY" onPress={() => navigation.navigate("HealthCheckScreen")} />
         </View>
       </View>
 
@@ -235,6 +251,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "relative",
+    marginTop: 10,
   },
   headerText: {
     alignItems: "center",
@@ -264,7 +281,7 @@ const styles = StyleSheet.create({
     flexDirection: "row", // Đặt ảnh theo chiều ngang
     justifyContent: "center", // Căn giữa theo trục ngang
     alignItems: "center", // Căn giữa theo trục dọc
-    marginTop: 10,
+    marginTop: -10,
   },
   imageStyle: {
     width: 100, // Điều chỉnh kích thước ảnh theo mong muốn

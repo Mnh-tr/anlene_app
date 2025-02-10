@@ -6,7 +6,20 @@ import { RootState, AppDispatch } from "../redux/stores/store";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import Modal from "react-native-modal";
+
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+import { StackParamList } from "../navigation/types";
+import CustomButton from "../components/CustomButton";
+// Định nghĩa kiểu dữ liệu cho navigation
+type HomeScreenNavigationProp = StackNavigationProp<
+  StackParamList,
+  "HomeScreen"
+>;
+
 const HealthCheckScreen: React.FC = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
   const dispatch: AppDispatch = useDispatch();
   const { images } = useSelector((state: RootState) => state.images);
   const [status, setStatus] = useState<"success" | "failure" | null>(null);
@@ -18,7 +31,6 @@ const HealthCheckScreen: React.FC = () => {
     dispatch(fetchImages());
   }, [dispatch]);
   const [isModalVisible, setModalVisible] = useState(false);
-
 
   const img_checkCo = images.find((image) => image.name === "checkCo.png")?.url;
   const img_checkKhop = images.find(
@@ -141,6 +153,13 @@ const HealthCheckScreen: React.FC = () => {
   const closeModal = () => {
     setModalVisible(false);
   };
+  const goInfoUser = () => {
+    setModalVisible(false);
+    setTimeout(() => {
+      navigation.navigate("InfoUserScreen", { stepsStatus });
+    }, 1000);
+  };
+  
   return (
     <LinearGradient colors={["#1C6A24", "#1C6A24"]} style={styles.container}>
       <View style={styles.header}>
@@ -148,8 +167,11 @@ const HealthCheckScreen: React.FC = () => {
           <Ionicons name="chevron-back" size={24} color="white" />
         </TouchableOpacity>
 
-        <Text style={styles.headerText}>Trang 2/6</Text>
-        <Ionicons name="home" size={24} color="white" />
+        <Text style={styles.headerText}>&lt; Trang 2/6 &gt;</Text>
+
+        <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
+          <Ionicons name="home" size={24} color="white" />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.progressContainer}>
@@ -256,7 +278,7 @@ const HealthCheckScreen: React.FC = () => {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={[
           styles.confirmButton,
           {
@@ -264,12 +286,15 @@ const HealthCheckScreen: React.FC = () => {
               ? "#B70002"
               : "#B8B8B8",
           },
-        ]}onPress={handleConfirm}
+        ]}
+        onPress={handleConfirm}
       >
         <Text style={styles.confirmText}>XÁC NHẬN</Text>
-      </TouchableOpacity>
-{/* Modal */}
-<Modal isVisible={isModalVisible}>
+      </TouchableOpacity> */}
+      <CustomButton text="XÁC NHẬN" status={stepsStatus.every((status) => status !== "pending")} onPress={handleConfirm} />
+
+      {/* Modal */}
+      <Modal isVisible={isModalVisible}>
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>CẢM ƠN</Text>
           <Text style={styles.modalMessage}>
@@ -285,7 +310,7 @@ const HealthCheckScreen: React.FC = () => {
             {/* Nút TIẾP TỤC */}
             <TouchableOpacity
               style={styles.continueButton}
-              onPress={closeModal}
+              onPress={goInfoUser}
             >
               <Text style={styles.continueText}>TIẾP TỤC</Text>
             </TouchableOpacity>
@@ -497,7 +522,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     width: "100%",
-    
   },
   cancelButton: {
     width: 150,
