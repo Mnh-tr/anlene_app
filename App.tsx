@@ -11,6 +11,9 @@ import store from "./src/redux/stores/store";
 import HomeScreen from "./src/screens/HomeScreen";
 import HealthCheckScreen from "./src/screens/HealthCheckScreen";
 import InfoUserScreen from "./src/screens/InfoUserScreen";
+import InfoHealthScreen from "./src/screens/InfoHealthScreen"
+import InfoProductScreen from "./src/screens/InfoProductScreen"
+
 // Định nghĩa kiểu danh sách màn hình
 import {StackParamList} from "./src/navigation/types"
 
@@ -20,7 +23,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator id={undefined} initialRouteName="HomeScreen">
+        <Stack.Navigator id={undefined} initialRouteName="InfoProductScreen">
           <Stack.Screen
             name="HomeScreen"
             component={HomeScreen}
@@ -34,6 +37,16 @@ const App = () => {
           <Stack.Screen
             name="InfoUserScreen"
             component={InfoUserScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="InfoHealthScreen"
+            component={InfoHealthScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="InfoProductScreen"
+            component={InfoProductScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

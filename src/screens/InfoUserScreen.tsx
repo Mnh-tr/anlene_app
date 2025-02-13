@@ -18,32 +18,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchImages } from "../redux/slices/imageSlice";
 import { RootState, AppDispatch } from "../redux/stores/store";
 import { LinearGradient } from "expo-linear-gradient";
-import MaskedView from "@react-native-masked-view/masked-view";
+import { GradientText } from "../components/GradientText";
 import CustomButton from "../components/CustomButton";
 type HomeScreenNavigationProp = StackNavigationProp<
   StackParamList,
   "HomeScreen"
 >;
 
-const GradientText = ({ colors, children, style }) => {
-  return (
-    <MaskedView
-      maskElement={
-        <Text style={[style, { backgroundColor: "transparent" }]}>
-          {children}
-        </Text>
-      }
-    >
-      <LinearGradient
-        colors={colors}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
-        <Text style={[style, { opacity: 0, marginTop: 15 }]}>{children}</Text>
-      </LinearGradient>
-    </MaskedView>
-  );
-};
+
 
 const InfoUserScreen = () => {
   const [name, setName] = useState("");
@@ -99,6 +81,8 @@ const InfoUserScreen = () => {
       setStatusInput(true);
       setShowError(false); // Ẩn lỗi khi nhập đủ
       console.log("Thông tin hợp lệ, xử lý tiếp theo...");
+      // truyền biến
+      navigation.navigate("InfoHealthScreen", {statusMessage })
     }
   };
 
@@ -113,6 +97,8 @@ const InfoUserScreen = () => {
     if (statusMessage === "warning") return "#187B33"; // Chọn màu thứ hai của warning
     return "#ECD24A"; // Màu mặc định cho danger
   };
+
+  
   return (
     <View style={styles.wrapper}>
       {/* Gradient background */}

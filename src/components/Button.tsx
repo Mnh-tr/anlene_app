@@ -1,21 +1,32 @@
 import React from "react";
-import { Text, TouchableOpacity, StyleSheet, View } from "react-native";
+import { Text, TouchableOpacity, StyleSheet, ViewStyle } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 type GradientButtonProps = {
   title: string;
   onPress?: () => void;
+  width?: number;
+  height?: number;
+  marginTop?: number;
+  marginBottom?: number;
 };
 
-const Button: React.FC<GradientButtonProps> = ({ title, onPress }) => {
+const Button: React.FC<GradientButtonProps> = ({
+  title,
+  onPress,
+  width = 229.12,
+  height = 46,
+  marginTop = 0,
+  marginBottom = 0,
+}) => {
   return (
     <LinearGradient
       colors={["#FFC200", "#FFFCAB", "#ECD24A", "#ECD24A", "#FFC200"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
-      style={styles.gradientBorder}
+      style={[styles.gradientBorder, { width, height, marginTop, marginBottom }]}
     >
-      <TouchableOpacity style={styles.button} onPress={onPress}>
+      <TouchableOpacity style={[styles.button, { borderRadius: height / 2 }]} onPress={onPress}>
         <Text style={styles.text}>{title.toUpperCase()}</Text>
       </TouchableOpacity>
     </LinearGradient>
@@ -24,15 +35,12 @@ const Button: React.FC<GradientButtonProps> = ({ title, onPress }) => {
 
 const styles = StyleSheet.create({
   gradientBorder: {
-    width: 229.12,
-    height: 46,
     borderRadius: 30.24,
     padding: 1.5,
   },
   button: {
     flex: 1,
     backgroundColor: "#B70002",
-    borderRadius: 30.24,
     justifyContent: "center",
     alignItems: "center",
   },
