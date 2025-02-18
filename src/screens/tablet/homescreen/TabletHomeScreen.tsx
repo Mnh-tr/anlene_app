@@ -13,9 +13,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchImages } from "../../../redux/slices/imageSlice";
 import { RootState, AppDispatch } from "../../../redux/stores/store";
 import Button from "../../../components/Button";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { StackParamList } from "../../../navigation/types";
 const { width, height } = Dimensions.get("window");
-
+type HomeScreenNavigationProp = StackNavigationProp<StackParamList, "HomeScreen">;
 const TabletHomeScreen = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
   const dispatch: AppDispatch = useDispatch();
   const { images } = useSelector((state: RootState) => state.images);
 
@@ -79,10 +83,10 @@ const TabletHomeScreen = () => {
         <Text style={styles.description}>
           Ngay lúc này, hãy{" "}
           <Text style={styles.highlight}>Kiểm tra Sức khỏe Cơ-Xương-Khớp </Text>
-          cùng Anlene để Tết này cả nhà vui khỏe đón Tết, trọn vẹn niềm vui.
+          cùng Anlene để Tết này cả nhà vui khỏe đón Tết, trọn vẹn niềm vui. 
         </Text>
         <View style={styles.buttonWrapper}>
-          <Button title="KIỂM TRA NGAY" />
+          <Button title="KIỂM TRA NGAY" onPress={() => navigation.navigate("TabletCheckScreen")}/>
         </View>
 
         <View style={styles.imageContainer}>
@@ -93,7 +97,7 @@ const TabletHomeScreen = () => {
 
         <Text style={styles.bottomText}>
           Bài kiểm tra Cơ, Xương, Khớp này được phát triển bởi đội ngũ Anlene
-        </Text>
+        </Text> 
 
         <Text style={styles.note}>*Lưu ý: Bài kiểm tra không dành cho đối tượng đang bị chấn thương hoặc có bệnh lý về cơ, xương, khớp hoặc tiểu đường  </Text>
       </LinearGradient>

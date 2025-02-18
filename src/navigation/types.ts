@@ -7,4 +7,5 @@ export type StackParamList = {
   InfoProductScreen: undefined;
   DetailProductScreen: undefined;
   TabletHomeScreen: undefined;
+  TabletCheckScreen: undefined;
 };
