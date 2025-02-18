@@ -5,4 +5,6 @@ export type StackParamList = {
   InfoUserScreen: { stepsStatus: ("pending" | "success" | "failure")[] };
   InfoHealthScreen: { statusMessage: string }; 
   InfoProductScreen: undefined;
+  DetailProductScreen: undefined;
+  TabletHomeScreen: undefined;
 };

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchImages } from "../redux/slices/imageSlice";
-import { RootState, AppDispatch } from "../redux/stores/store";
+import { fetchImages } from "../../../redux/slices/imageSlice";
+import { RootState, AppDispatch } from "../../../redux/stores/store";
 import MaskedView from "@react-native-masked-view/masked-view";
 import {
   View,
@@ -13,11 +13,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Button from "../components/Button";
+import Button from "../../../components/Button";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-
-import { StackParamList } from "../navigation/types";
+import {styles} from "./styles"
+import { StackParamList } from "../../../navigation/types";
+import Header from "../../../components/Header";
 const { width, height } = Dimensions.get("window");
 
 // Định nghĩa kiểu dữ liệu cho navigation
@@ -228,68 +229,6 @@ const HomeScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#006400",
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#006400",
-  },
-  errorText: {
-    color: "#fff",
-    fontSize: 16,
-    textAlign: "center",
-  },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "relative",
-    marginTop: 10,
-  },
-  headerText: {
-    alignItems: "center",
-    color: "white",
-    fontSize: 16,
-  },
-  headerTitle: {
-    position: "absolute",
-    right: 16,
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  maskedTextStyle: {
-    textAlign: "center",
-    fontSize: 25,
-    fontFamily: "SVN-Gotham",
-    fontWeight: "bold",
-  },
-  buttonWrapper: {
-    alignItems: "center",
-    position: "absolute",
-    bottom: 20,
-    alignSelf: "center",
-  },
-  imageContainer: {
-    flexDirection: "row", // Đặt ảnh theo chiều ngang
-    justifyContent: "center", // Căn giữa theo trục ngang
-    alignItems: "center", // Căn giữa theo trục dọc
-    marginTop: -10,
-  },
-  imageStyle: {
-    width: 100, // Điều chỉnh kích thước ảnh theo mong muốn
-    height: 100,
-    resizeMode: "contain", // Giữ nguyên tỉ lệ ảnh
-    marginHorizontal: 5, // Khoảng cách giữa các ảnh
-  },
-  
-});
+
 
 export default HomeScreen;
