@@ -84,7 +84,7 @@ const handleBackPress = () => {
       )}
       <ScrollView contentContainerStyle={styles.container}>
         {/* Header */}
-        <Header currentPage={4} totalPages={6} onBackPress={handleBackPress} />
+        <Header currentPage={4} totalPages={6} onBackPress={handleBackPress} onHomePress={() => navigation.navigate("HomeScreen")}/>
 
         {/* Title */}
         <Image

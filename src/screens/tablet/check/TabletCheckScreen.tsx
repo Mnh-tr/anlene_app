@@ -8,7 +8,18 @@ import { RootState, AppDispatch } from "../../../redux/stores/store";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import CustomButton from "../../../components/CustomButton";
+import Modal from "react-native-modal";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
+import { StackParamList } from "../../../navigation/types";
+
+type HomeScreenNavigationProp = StackNavigationProp<
+  StackParamList,
+  "HomeScreen"
+>;
+
 const TabletCheckScreen = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
   const dispatch: AppDispatch = useDispatch();
   const [step, setStep] = useState(0); // Bước hiện tại
   const [answers, setAnswers] = useState<string[]>(Array(4).fill("")); // Lưu kết quả
@@ -65,17 +76,34 @@ const TabletCheckScreen = () => {
     const updatedAnswers = [...answers];
     updatedAnswers[index] = status;
     setAnswers(updatedAnswers);
-    
+
     if (index === step - 1 && step < steps.length) {
       setTimeout(() => setStep(step + 1), 300);
     }
   };
 
   const handleConfirm = () => {
-    console.log("Kết quả kiểm tra:", answers);
+    if (
+      answers.length === 4 &&
+      answers.every((status) => status === "success" || status === "failure")
+    ) {
+      setModalVisible(true);
+    }
   };
   const buttonColors = ["#FFC200", "#FFFCAB", "#ECD24A", "#ECD24A", "#FFC200"];
 
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+  const goInfoUser = () => {
+    setModalVisible(false);
+
+    setTimeout(() => {
+      navigation.navigate("TabletInfoUserScreen", { answers });
+    }, 1000);
+
+    console.log("Kết quả kiểm tra:", answers);
+  };
   return (
     <>
       <LinearGradient
@@ -84,7 +112,7 @@ const TabletCheckScreen = () => {
         end={{ x: 1, y: 1 }}
         style={styles.container}
       >
-        <Header currentPage={2} totalPages={6} onBackPress={handleBackPress} />
+        <Header currentPage={2} totalPages={6} onBackPress={handleBackPress} onHomePress={() => navigation.navigate("TabletHomeScreen")}/>
         <Image
           style={{
             width: 116.85,
@@ -118,10 +146,7 @@ const TabletCheckScreen = () => {
 
         <View style={styles.stepsContainer}>
           {steps.map((stepItem, index) => (
-            <View
-              key={index}
-              style={styles.step}
-            >
+            <View key={index} style={styles.step}>
               <Text style={styles.stepTitle}>{stepItem.title}</Text>
               <View
                 style={[
@@ -149,15 +174,35 @@ const TabletCheckScreen = () => {
               <Text style={styles.stepDescription}>{stepItem.description}</Text>
 
               <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={() => handleStatusChange(index, "success")}
-                  style={[styles.button, { borderColor: answers[index] === "success" ? buttonColors[index] : "transparent", borderWidth: 2 }]}
-                > 
+                <TouchableOpacity
+                  onPress={() => handleStatusChange(index, "success")}
+                  style={[
+                    styles.button,
+                    {
+                      borderColor:
+                        answers[index] === "success"
+                          ? buttonColors[index]
+                          : "transparent",
+                      borderWidth: 2,
+                    },
+                  ]}
+                >
                   <Ionicons name="happy" size={40} color="green" />
                   <Text style={styles.buttonTextSuccess}>Được</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleStatusChange(index, "failure")}
-                  style={[styles.button, { borderColor: answers[index] === "failure" ? buttonColors[index] : "transparent", borderWidth: 2 }]}
-                > 
+                <TouchableOpacity
+                  onPress={() => handleStatusChange(index, "failure")}
+                  style={[
+                    styles.button,
+                    {
+                      borderColor:
+                        answers[index] === "failure"
+                          ? buttonColors[index]
+                          : "transparent",
+                      borderWidth: 2,
+                    },
+                  ]}
+                >
                   <Ionicons name="sad" size={40} color="red" />
                   <Text style={styles.buttonTextFail}>Không được</Text>
                 </TouchableOpacity>
@@ -166,9 +211,44 @@ const TabletCheckScreen = () => {
           ))}
         </View>
         <View style={styles.confirmButton}>
-          <CustomButton text="XÁC NHẬN" status={answers.length === 4 && answers.every((status) => status === "success" || status === "failure")} onPress={handleConfirm} /> 
+          <CustomButton
+            text="XÁC NHẬN"
+            status={
+              answers.length === 4 &&
+              answers.every(
+                (status) => status === "success" || status === "failure"
+              )
+            }
+            onPress={handleConfirm}
+          />
         </View>
-
+        {/* Modal */}
+        <Modal isVisible={isModalVisible}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>CẢM ƠN</Text>
+            <Text style={styles.modalMessage}>
+              Bạn đã tham gia bài kiểm tra sức khoẻ{"\n"}
+              Hãy tiếp tục để có thể nhận kết quả{"\n"}
+              kiểm tra sức khoẻ của bạn.
+            </Text>
+            <View style={styles.modalButtons}>
+              {/* Nút HỦY */}
+              <TouchableOpacity
+                style={styles.cancelButton}
+                onPress={closeModal}
+              >
+                <Text style={styles.cancelText}>HỦY</Text>
+              </TouchableOpacity>
+              {/* Nút TIẾP TỤC */}
+              <TouchableOpacity
+                style={styles.continueButton}
+                onPress={goInfoUser}
+              >
+                <Text style={styles.continueText}>TIẾP TỤC</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
         <Text style={styles.note}>
           *Lưu ý: Hãy dừng bài tập ngay nếu cảm thấy không thoải mái. Đảm bảo vị
           trí tập an toàn để không té ngã.
@@ -276,12 +356,12 @@ const styles = StyleSheet.create({
   button: {
     width: 90,
     height: 90,
-    
+
     borderRadius: 10,
     alignItems: "center",
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor:"#71A162",
+    backgroundColor: "#71A162",
   },
   buttonSuccess: {
     width: 90,
@@ -309,6 +389,56 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: 46,
     alignSelf: "center",
+  },
+  modalContent: {
+    position: "absolute",
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: "700",
+    color: "#478449",
+  },
+  modalMessage: {
+    fontSize: 14,
+    textAlign: "center",
+    marginBottom: 10,
+    fontFamily: "SVN-Gotham",
+  },
+  modalButtons: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+  },
+  cancelButton: {
+    width: 150,
+    borderWidth: 1,
+    borderColor: "#B70002",
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+  },
+  cancelText: {
+    textAlign: "center",
+    color: "#B70002",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  continueButton: {
+    width: 150,
+    backgroundColor: "#B70002",
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 20,
+  },
+  continueText: {
+    color: "white",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 16,
   },
   note: {
     fontSize: 12,

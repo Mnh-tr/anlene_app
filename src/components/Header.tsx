@@ -11,7 +11,7 @@ type HomeScreenNavigationProp = StackNavigationProp<
   StackParamList,
   "HomeScreen"
 >;
-const Header = ({ currentPage, totalPages, onBackPress }) => {
+const Header = ({ currentPage, totalPages, onBackPress, onHomePress }) => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   return (
@@ -22,7 +22,7 @@ const Header = ({ currentPage, totalPages, onBackPress }) => {
 
       <Text style={styles.headerText}>&lt; Trang {currentPage}/{totalPages} &gt;</Text>
 
-      <TouchableOpacity onPress={() => navigation.navigate("HomeScreen")}>
+      <TouchableOpacity onPress={onHomePress}>
         <Ionicons name="home" size={24} color="white" />
       </TouchableOpacity>
     </View>

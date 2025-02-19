@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-  Image,
-  Pressable,
-} from "react-native";
-import { Checkbox } from "react-native-paper";
+    View,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    StyleSheet,
+    ScrollView,
+    Image,
+    Pressable,
+  } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
@@ -21,34 +20,36 @@ import { LinearGradient } from "expo-linear-gradient";
 import { GradientText } from "../../../components/GradientText";
 import CustomButton from "../../../components/CustomButton";
 import Header from "../../../components/Header";
-import {styles} from "./styles"
+import {styles} from "../../mobile/infoUse/styles"
 type HomeScreenNavigationProp = StackNavigationProp<
   StackParamList,
   "HomeScreen"
 >;
 
+const TabletInfoUserScreen: React.FC = () => {
+    const route = useRoute();
+      const { answers } = route.params as {
+        answers: ("success" | "failure")[];
+      };
+
+      console.log(answers);
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+const [isChecked, setIsChecked] = useState(false);
 
 
-const InfoUserScreen = () => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
-  const navigation = useNavigation<HomeScreenNavigationProp>();
+const navigation = useNavigation<HomeScreenNavigationProp>();
   const [statusInput, setStatusInput] = useState(false);
   const [showError, setShowError] = useState(false);
   const dispatch: AppDispatch = useDispatch();
-  const route = useRoute();
-  const { stepsStatus } = route.params as {
-    stepsStatus: ("pending" | "success" | "failure")[];
-  };
-  // console.log(stepsStatus);
+
   const isFormValid = name.trim() !== "" && phone.trim() !== "" && isChecked;
 
   const getStatusMessage = (
-    stepsStatus: ("pending" | "success" | "failure")[]
+    answers: ("success" | "failure")[]
   ) => {
-    const failureCount = stepsStatus.filter(
+    const failureCount = answers.filter(
       (status) => status === "failure"
     ).length;
 
@@ -61,7 +62,7 @@ const InfoUserScreen = () => {
     }
   };
   // Sử dụng:
-  const statusMessage = getStatusMessage(stepsStatus);
+  const statusMessage = getStatusMessage(answers);
   console.log(statusMessage);
 
   const { images, loading, error } = useSelector(
@@ -126,7 +127,7 @@ const InfoUserScreen = () => {
 
       {/* Nội dung chính */}
       <ScrollView contentContainerStyle={styles.container}>
-      <Header currentPage={3} totalPages={6} onBackPress={handleBackPress} onHomePress={() => navigation.navigate("HomeScreen")}/>
+      <Header currentPage={3} totalPages={6} onBackPress={handleBackPress} onHomePress={() => navigation.navigate("TabletHomeScreen")}/>
         <Image
           style={{
             width: 116.85,
@@ -138,16 +139,16 @@ const InfoUserScreen = () => {
         ></Image>
         {statusMessage === "success" ? (
           <>
-            <Text style={[styles.headerTitle, { color: "#ECD24A" }]}>
+            <Text style={[styles.TabletHeaderTitle, { color: "#ECD24A" }]}>
               HOÀN THÀNH BÀI KIỂM TRA
             </Text>
             <GradientText
               colors={["#FFC200", "#F1ED86", "#ECD24A", "#ECD24A", "#FFC200"]}
-              style={styles.warningText}
+              style={styles.TabletWarningText}
             >
               XIN CHÚC MỪNG!
             </GradientText>
-            <Text style={styles.description}>
+            <Text style={styles.descriptionTablet}>
               Bạn có hệ Cơ-Xương-Khớp linh hoạt và có vẻ sức đề kháng của bạn
               cũng tốt.
             </Text>
@@ -162,34 +163,34 @@ const InfoUserScreen = () => {
             </GradientText>
             <GradientText
               colors={["#376E48", "#187B33"]}
-              style={styles.warningText}
+              style={styles.TabletWarningText}
             >
               LƯU Ý MỘT CHÚT!
             </GradientText>
-            <Text style={styles.description}>
+            <Text style={styles.descriptionTablet}>
               Có vẻ bạn đang có hệ vận động tốt nhưng cần chú ý đến sức đề kháng
               hơn nhé...
             </Text>
           </>
         ) : (
           <>
-            <Text style={styles.headerTitle}>HOÀN THÀNH BÀI KIỂM TRA</Text>
-            <Text style={styles.warning}>LƯU Ý MỘT CHÚT!</Text>
-            <Text style={styles.description}>
+            <Text style={styles.TabletHeaderTitle}>HOÀN THÀNH BÀI KIỂM TRA</Text>
+            <Text style={styles.TabletWarning}>LƯU Ý MỘT CHÚT!</Text>
+            <Text style={styles.descriptionTablet}>
               Tuy rằng có vẻ bạn đang có đề kháng tốt nhưng cần quan tâm đến hệ
               vận động nhiều hơn nhé, bởi sau tuổi 40...
             </Text>
           </>
         )}
-        <Text style={styles.info}>
+        <Text style={styles.infoTablet}>
           Điền thông tin bên dưới để xem đầy đủ kết quả và nhận ngay Voucher ưu
           đãi lên đến 100.000đ từ Anlene.
         </Text>
 
         {/* Form nhập thông tin */}
-        <View style={styles.inputContainer}>
+        <View style={styles.inputContainerTablet}>
           <View style={{ flexDirection: "row" }}>
-            <Text style={styles.label}>Họ tên:</Text>
+            <Text style={styles.label}>Họ và tên:</Text>
             <Text style={{ color: "#ECD24A" }}> *</Text>
           </View>
 
@@ -210,7 +211,7 @@ const InfoUserScreen = () => {
           )}
         </View>
 
-        <View style={styles.inputContainer}>
+        <View style={styles.inputContainerTablet}>
           <View style={{ flexDirection: "row" }}>
             <Text style={styles.label}>Số điện thoại:</Text>
             <Text style={{ color: "#ECD24A" }}> *</Text>
@@ -234,7 +235,7 @@ const InfoUserScreen = () => {
           )}
         </View>
 
-        <View style={styles.inputContainer}>
+        <View style={styles.inputContainerTablet}>
           <Text style={styles.label}>Email:</Text>
           <TextInput
             style={styles.input}
@@ -246,7 +247,7 @@ const InfoUserScreen = () => {
         </View>
 
         {/* Checkbox đồng ý điều khoản */}
-        <View style={styles.checkboxContainer}>
+        <View style={styles.checkboxContainerTablet}>
           <TouchableOpacity
             style={[
               styles.checkbox,
@@ -268,13 +269,13 @@ const InfoUserScreen = () => {
             )}
           </TouchableOpacity>
 
-          <Text style={styles.checkboxText}>
+          <Text style={styles.checkboxTextTablet}>
             Tôi đồng ý để Anlene Vietnam liên hệ trong bất kỳ chương trình quảng
             cáo sản phẩm hay khuyến mãi nào.
           </Text>
         </View>
 
-        <Text style={styles.privacyNotice}>
+        <Text style={styles.privacyNoticeTablet}>
           Bằng cách điền bảng thông tin này, tôi đồng ý với việc thông tin của
           mình sẽ xử lý dựa trên chính sách bảo mật của Anlene.
         </Text>
@@ -291,5 +292,4 @@ const InfoUserScreen = () => {
 };
 
 
-
-export default InfoUserScreen;
+export default TabletInfoUserScreen;

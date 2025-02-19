@@ -62,7 +62,7 @@ const InfoProductScreen = () => {
   };
   return (
     <View style={styles.container}>
-     <Header currentPage={5} totalPages={6} onBackPress={handleBackPress} />
+     <Header currentPage={5} totalPages={6} onBackPress={handleBackPress} onHomePress={() => navigation.navigate("HomeScreen")}/>
 
       {/* Title */}
       <Image

@@ -164,7 +164,7 @@ const HealthCheckScreen: React.FC = () => {
   
   return (
     <LinearGradient colors={["#1C6A24", "#1C6A24"]} style={styles.container}>
-      <Header currentPage={2} totalPages={6} onBackPress={handleBackPress} />
+      <Header currentPage={2} totalPages={6} onBackPress={handleBackPress} onHomePress={() => navigation.navigate("HomeScreen")}/>
 
 
       <View style={styles.progressContainer}>

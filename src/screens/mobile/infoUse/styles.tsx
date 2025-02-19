@@ -32,10 +32,28 @@ export const styles = StyleSheet.create({
       fontFamily: "SVN-Gotham",
       color: "#DF1E13",
     },
+    TabletHeaderTitle: {
+      fontSize: 18,
+      marginTop: 15,
+      fontWeight: "700",
+      marginBottom: 10,
+      textAlign: "center",
+      fontFamily: "SVN-Gotham",
+      color: "#DF1E13",
+    },
     warning: {
       marginTop: -8,
       textAlign: "center",
       fontSize: 26,
+      fontWeight: "bold",
+      color: "#DF1E13",
+      marginBottom: 10,
+      fontFamily: "SVN-Gotham",
+    },
+    TabletWarning: {
+      marginTop: -8,
+      textAlign: "center",
+      fontSize: 36,
       fontWeight: "bold",
       color: "#DF1E13",
       marginBottom: 10,
@@ -47,6 +65,16 @@ export const styles = StyleSheet.create({
       textAlign: "center",
       marginBottom: 10,
       fontWeight: "700",
+      color: "#FFFFFF",
+      fontFamily: "SVN-Gotham",
+    },
+    descriptionTablet: {
+      fontSize: 14,
+      lineHeight: 18,
+      textAlign: "center",
+      marginBottom: 10,
+      fontWeight: "bold",
+      
       color: "#FFFFFF",
       fontFamily: "SVN-Gotham",
     },
@@ -71,6 +99,12 @@ export const styles = StyleSheet.create({
       textAlign: "center",
       fontFamily: "SVN-Gotham",
     },
+    TabletWarningText: {
+      fontSize: 36,
+      fontWeight: "bold",
+      textAlign: "center",
+      fontFamily: "SVN-Gotham",
+    },
     info: {
       fontSize: 15,
       textAlign: "center",
@@ -79,8 +113,22 @@ export const styles = StyleSheet.create({
       lineHeight: 20.55,
       fontFamily: "SVN-Gotham",
     },
+    infoTablet: {
+      fontSize: 18,
+      width: 622,
+      textAlign: "center",
+      marginBottom: 20,
+      color: "#FFFFFF",
+      lineHeight: 20.55,
+      fontFamily: "SVN-Gotham",
+      fontWeight: "bold",
+    },
     inputContainer: {
       width: "100%",
+      marginBottom: 15,
+    },
+    inputContainerTablet: {
+      width: 660,
       marginBottom: 15,
     },
     label: {
@@ -110,6 +158,13 @@ export const styles = StyleSheet.create({
       marginBottom: 10,
       width: "100%",
     },
+    checkboxContainerTablet: {
+      
+      flexDirection: "row",
+      alignItems: "center",
+      marginBottom: 10,
+      width: 660,
+    },
     checkbox: {
       width: 24,
       height: 24,
@@ -128,10 +183,27 @@ export const styles = StyleSheet.create({
       fontFamily: "SVN-Gotham",
       flex: 1,
     },
+    checkboxTextTablet: {
+      lineHeight: 16,
+      fontSize: 15,
+      marginLeft: 8,
+      color: "#ffffff",
+      fontFamily: "SVN-Gotham",
+      flex: 1,
+    },
     privacyNotice: {
       fontSize: 11,
       color: "#ffffff",
       textAlign: "center",
+      marginBottom: 20,
+      fontStyle: "italic",
+      fontFamily: "SVN-Gotham",
+    },
+    privacyNoticeTablet: {
+      width: 623,
+      fontSize: 14,
+      color: "#ffffff",
+      
       marginBottom: 20,
       fontStyle: "italic",
       fontFamily: "SVN-Gotham",

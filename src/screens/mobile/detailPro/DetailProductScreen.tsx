@@ -52,7 +52,7 @@ const DetailProductScreen = () => {
       style={styles.container}
     >
       {/* Header */}
-      <Header currentPage={6} totalPages={6} onBackPress={handleBackPress} />
+      <Header currentPage={6} totalPages={6} onBackPress={handleBackPress} onHomePress={() => navigation.navigate("HomeScreen")}/>
 
       
       {/* Scroll Content */}

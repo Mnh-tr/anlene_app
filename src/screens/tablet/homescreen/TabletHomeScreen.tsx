@@ -94,7 +94,7 @@ const TabletHomeScreen = () => {
           <Image style={styles.imageStyle} source={{ uri: imgChi5Phut }} />
           <Image style={styles.imageStyle} source={{ uri: imgVoucher }} />
         </View>
-
+ 
         <Text style={styles.bottomText}>
           Bài kiểm tra Cơ, Xương, Khớp này được phát triển bởi đội ngũ Anlene
         </Text> 
