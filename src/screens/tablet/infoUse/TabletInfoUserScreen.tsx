@@ -63,7 +63,7 @@ const navigation = useNavigation<HomeScreenNavigationProp>();
   };
   // Sử dụng:
   const statusMessage = getStatusMessage(answers);
-  console.log(statusMessage);
+  console.log("Kiểu sức khỏe: "+statusMessage);
 
   const { images, loading, error } = useSelector(
     (state: RootState) => state.images
@@ -85,7 +85,7 @@ const navigation = useNavigation<HomeScreenNavigationProp>();
       setShowError(false); // Ẩn lỗi khi nhập đủ
       console.log("Thông tin hợp lệ, xử lý tiếp theo...");
       // truyền biến
-      navigation.navigate("InfoHealthScreen", {statusMessage })
+      navigation.navigate("TabletInfoHealthScreen", {statusMessage })
     }
   };
 

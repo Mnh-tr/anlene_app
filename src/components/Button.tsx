@@ -7,6 +7,7 @@ type GradientButtonProps = {
   onPress?: () => void;
   width?: number;
   height?: number;
+  fontSize?:number;
   marginTop?: number;
   marginBottom?: number;
 };
@@ -17,6 +18,7 @@ const Button: React.FC<GradientButtonProps> = ({
   width = 229.12,
   height = 46,
   marginTop = 0,
+  fontSize= 16,
   marginBottom = 0,
 }) => {
   return (
@@ -27,7 +29,7 @@ const Button: React.FC<GradientButtonProps> = ({
       style={[styles.gradientBorder, { width, height, marginTop, marginBottom }]}
     >
       <TouchableOpacity style={[styles.button, { borderRadius: height / 2 }]} onPress={onPress}>
-        <Text style={styles.text}>{title.toUpperCase()}</Text>
+        <Text style={[styles.text, {fontSize}]}>{title.toUpperCase()}</Text>
       </TouchableOpacity>
     </LinearGradient>
   );
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "white",
-    fontSize: 16,
+    
     fontWeight: "bold",
   },
 });

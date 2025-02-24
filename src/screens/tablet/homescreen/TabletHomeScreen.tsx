@@ -7,14 +7,14 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import MaskedView from "@react-native-masked-view/masked-view";
+import { LinearGradient } from "expo-linear-gradient"; 
+import MaskedView from "@react-native-masked-view/masked-view"; 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchImages } from "../../../redux/slices/imageSlice";
 import { RootState, AppDispatch } from "../../../redux/stores/store";
 import Button from "../../../components/Button";
 import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { StackNavigationProp } from "@react-navigation/stack"; 
 import { StackParamList } from "../../../navigation/types";
 const { width, height } = Dimensions.get("window");
 type HomeScreenNavigationProp = StackNavigationProp<StackParamList, "HomeScreen">;

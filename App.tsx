@@ -19,6 +19,7 @@ import TabletHomeScreen from "./src/screens/tablet/homescreen/TabletHomeScreen";
 import * as ScreenOrientation from "expo-screen-orientation";
 import TabletCheckScreen from "./src/screens/tablet/check/TabletCheckScreen";
 import TabletInfoUserScreen from "./src/screens/tablet/infoUse/TabletInfoUserScreen";
+import TabletInfoHealthScreen from "./src/screens/tablet/infoHealth/TabletInfoHealthScreen"
 // Định nghĩa kiểu danh sách màn hình
 import {StackParamList} from "./src/navigation/types"
 
@@ -85,6 +86,11 @@ const App = () => {
           <Stack.Screen
             name="TabletInfoUserScreen"
             component={TabletInfoUserScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="TabletInfoHealthScreen"
+            component={TabletInfoHealthScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

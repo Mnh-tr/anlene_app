@@ -1,4 +1,3 @@
-// TwoLineDisplay.tsx
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
@@ -6,7 +5,10 @@ import { View, Text, StyleSheet } from 'react-native';
 interface TwoLineDisplayProps {
   topText: string;
   bottomText: string;
-  // Có thể thêm các props tùy chọn
+  width?: number;  // Kích thước chiều rộng (tuỳ chọn)
+  height?: number; // Kích thước chiều cao (tuỳ chọn)
+  topFontSize?: number; // Kích thước chữ trên
+  bottomFontSize?: number; // Kích thước chữ dưới
   containerStyle?: object;
   topTextStyle?: object;
   bottomTextStyle?: object;
@@ -15,16 +17,20 @@ interface TwoLineDisplayProps {
 const TwoLineDisplay: React.FC<TwoLineDisplayProps> = ({
   topText,
   bottomText,
+  width = 100,  // Mặc định 100 nếu không truyền vào
+  height = 42,  // Mặc định 42 nếu không truyền vào
+  topFontSize = 12, // Mặc định 12 nếu không truyền vào
+  bottomFontSize = 12, // Mặc định 12 nếu không truyền vào
   containerStyle,
   topTextStyle,
   bottomTextStyle
 }) => {
   return (
-    <View style={[styles.container, containerStyle]}>
-      <Text style={[styles.textTop, topTextStyle]}>
+    <View style={[styles.container, { width, height }, containerStyle]}>
+      <Text style={[styles.textTop, { fontSize: topFontSize }, topTextStyle]}>
         {topText}
       </Text>
-      <Text style={[styles.textBottom, bottomTextStyle]}>
+      <Text style={[styles.textBottom, { fontSize: bottomFontSize }, bottomTextStyle]}>
         {bottomText}
       </Text>
     </View>
@@ -38,17 +44,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'white',
     padding: 10,
-    width: 100,
-    height: 42,
     marginTop: 5,
     justifyContent: 'center',
     alignItems: 'center',
     // Shadow cho iOS
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     // Shadow cho Android
@@ -57,13 +58,11 @@ const styles = StyleSheet.create({
   textTop: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: 12,
     textTransform: 'uppercase',
     textAlign: 'center',
   },
   textBottom: {
     color: '#FFD700',
-    fontSize: 12,
     textAlign: 'center',
     textTransform: 'uppercase',
   },

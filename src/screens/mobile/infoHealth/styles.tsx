@@ -9,6 +9,23 @@ export const styles = StyleSheet.create({
       padding: 20,
       alignItems: "center",
     },
+    TabletContainer: {
+      flexGrow: 1,
+      padding: 20,
+      alignItems: "center",
+      marginLeft: 20,
+    },
+    containerTablet:{
+      flexDirection:"row",
+    },
+    containerText:{
+      flex: 1.7,
+    },
+    containerImg:{
+      flex: 1.3,
+      justifyContent: "center",
+      alignItems: "center",
+    },
     gradient: {
       ...StyleSheet.absoluteFillObject, // Trải đều background
       zIndex: -1, // Đặt background dưới nội dung
@@ -62,11 +79,25 @@ export const styles = StyleSheet.create({
       color: "#DF1E13",
       marginTop: 10,
     },
+    warningTitleTablet: {
+      fontSize: 36,
+      fontWeight: "bold",
+      marginLeft: 10,
+      color: "#DF1E13",
+      marginTop: 10,
+    },
     description: {
       width: 342,
       fontSize: 14,
       fontFamily: "SVN-Gotham",
       textAlign: "center",
+      color: "#FFFFFF",
+    },
+    descriptionTablet: {
+      width: 509,
+      fontSize: 16,
+      fontFamily: "SVN-Gotham",
+      
       color: "#FFFFFF",
     },
     headerText: {
@@ -82,6 +113,11 @@ export const styles = StyleSheet.create({
       justifyContent: "space-between",
       marginTop: 16,
     },
+    cardContainerTablet: {
+      flexDirection: "row",
+      
+      marginTop: 8,
+    },
     card: {
       flex: 1,
       borderRadius: 8,
@@ -89,9 +125,21 @@ export const styles = StyleSheet.create({
       alignItems: "center",
       marginHorizontal: 4,
     },
+    cardTablet: {
+      flex: 1,
+      borderRadius: 8,
+      padding: 8,
+      
+    
+    },
     cardImage: {
       width: 86,
       height: 86,
+      resizeMode: "contain",
+    },
+    cardImageTablet: {
+      width: 160,
+      height: 160,
       resizeMode: "contain",
     },
     additionalInfo: {
@@ -101,11 +149,24 @@ export const styles = StyleSheet.create({
       color: "#FFFFFF",
       marginTop: 2,
     },
+    additionalInfoTablet: {
+      width: 602,
+      fontSize: 20,
+      fontFamily: "SVN-Gotham",
+      color: "#FFFFFF",
+      marginTop: 2,
+    },
     benefitContainer: {},
   
     productImage: {
       width: 300,
       height: 250,
+      resizeMode: "contain",
+      zIndex: 1,
+    },
+    productImageTablet: {
+      width: 555,
+      height: 502,
       resizeMode: "contain",
       zIndex: 1,
     },
@@ -119,8 +180,30 @@ export const styles = StyleSheet.create({
       width: 220,
       zIndex: 2,
     },
+    textStyleTablet: {
+    
+      fontFamily: "SVN-Gotham",
+      alignItems: "center",
+      color: "#fff",
+      textAlign: "center",
+      fontStyle: "italic",
+      fontSize: 10,
+      width: 268,
+      zIndex: 2,
+    },
     title: {
       fontSize: 13,
+      textAlign: "center",
+      fontWeight: "bold",
+      color: "#FFC200",
+      textShadowColor: "#ECD24A",
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 5,
+      marginTop: 6,
+      fontFamily: "SVN-Gotham",
+    },
+    titleTablet: {
+      fontSize: 20,
       textAlign: "center",
       fontWeight: "bold",
       color: "#FFC200",
@@ -147,16 +230,13 @@ export const styles = StyleSheet.create({
       marginTop: 4,
       width: 340,
     },
-    ctaButton: {
-      backgroundColor: "#FF0000",
-      padding: 16,
-      borderRadius: 8,
-      marginTop: 16,
+    infoTextTablet: {
+      fontSize: 13,
+      color: "#FFFFFF",
+      fontStyle: "italic",
+      marginTop: 4,
+      width: 602,
     },
-    ctaButtonText: {
-      fontSize: 16,
-      fontWeight: "bold",
-      textAlign: "center",
-      color: "#fff",
-    },
+
+    
   });

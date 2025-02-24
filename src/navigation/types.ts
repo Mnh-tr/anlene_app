@@ -9,4 +9,5 @@ export type StackParamList = {
   TabletHomeScreen: undefined;
   TabletCheckScreen: undefined;
   TabletInfoUserScreen: {};
+  TabletInfoHealthScreen: {statusMessage: string};
 };
